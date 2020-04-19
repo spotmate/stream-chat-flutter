@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:stream_chat/stream_chat.dart';
+import 'package:stream_chat_flutter/src/user_avatar.dart';
 
 import '../stream_chat_flutter.dart';
 import 'channel_name.dart';
@@ -37,7 +38,7 @@ class ChannelPreview extends StatelessWidget {
       onTap: () {
         onTap(channel);
       },
-      leading: ChannelImage(),
+      leading: _buildImage(context),
       title: ChannelName(
         textStyle: StreamChatTheme.of(context).channelPreviewTheme.title,
       ),
@@ -61,6 +62,22 @@ class ChannelPreview extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  StatelessWidget _buildImage(BuildContext context) {
+    if (channel.state.members.length == 2) {
+      return UserAvatar(
+        user: channel.state.members
+            .firstWhere((m) => m.user.id != StreamChat.of(context).user.id)
+            .user,
+        constraints: StreamChatTheme.of(context)
+            .channelPreviewTheme
+            .avatarTheme
+            .constraints,
+      );
+    }
+
+    return ChannelImage();
   }
 
   Widget _buildDate(BuildContext context) {
