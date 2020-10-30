@@ -33,7 +33,7 @@ class ReactionPicker extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: reactionIcons.map((reactionIcon) {
-          final ownReactionIndex = message.ownReactions?.indexWhere(
+          final ownReactionIndex = message.latestReactions?.indexWhere(
                   (reaction) => (reaction.type == reactionIcon.type) && (reaction.userId == message.user.id)) ??
               -1;
           // final ownReactionIndex = message.ownReactions?.indexWhere(
