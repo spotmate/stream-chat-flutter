@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stream_chat/stream_chat.dart';
+import 'package:stream_chat_flutter/src/stream_svg_icon.dart';
 import 'package:stream_chat_flutter/src/utils.dart';
 
 class FileAttachment extends StatelessWidget {
@@ -21,9 +22,25 @@ class FileAttachment extends StatelessWidget {
         },
         child: Container(
           width: size?.width ?? 100,
-          height: size?.height ?? 100,
-          child: Center(
-            child: Icon(Icons.attach_file),
+          decoration: BoxDecoration(
+            color: Colors.white,
+          ),
+          child: ListTile(
+            dense: true,
+            leading: Container(child: Placeholder(), height: 40.0,
+              width: 33.33,),
+            title: Text('Demo', style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),),
+            subtitle: Text('Demo', style: TextStyle(
+              color: Colors.black.withOpacity(0.5),
+            ),),
+            trailing: IconButton(
+              icon: StreamSvgIcon.down(
+                color: Colors.black,
+              ),
+              onPressed: () {},
+            )
           ),
         ),
       ),
