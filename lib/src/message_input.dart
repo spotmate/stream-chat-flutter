@@ -761,6 +761,17 @@ class MessageInputState extends State<MessageInput> {
       return;
     }
 
+    if (file.size > 20 * 1024) {
+      Scaffold.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'The file is too large to upload. The file size limit is 20MB.',
+          ),
+        ),
+      );
+      return;
+    }
+
     final channel = StreamChannel.of(context).channel;
     final attachment = _SendingAttachment(
       file: file,
