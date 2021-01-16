@@ -255,7 +255,7 @@ class _ChannelListViewState extends State<ChannelListView>
                       minHeight: viewportConstraints.maxHeight,
                     ),
                     child: Center(
-                      child: Text('You have no channels currently'),
+                      child: Text('現在はチャンネルがありません'),
                     ),
                   ),
                 );
