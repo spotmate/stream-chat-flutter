@@ -666,7 +666,7 @@ class MessageInputState extends State<MessageInput> {
             children: <Widget>[
               ListTile(
                 title: Text(
-                  'Add a file',
+                  'ファイルを追加',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
@@ -674,7 +674,7 @@ class MessageInputState extends State<MessageInput> {
               ),
               ListTile(
                 leading: Icon(Icons.image),
-                title: Text('Upload a photo'),
+                title: Text('写真をアップロード'),
                 onTap: () {
                   pickFile(DefaultAttachmentTypes.image, false);
                   Navigator.pop(context);
@@ -682,7 +682,7 @@ class MessageInputState extends State<MessageInput> {
               ),
               ListTile(
                 leading: Icon(Icons.video_library),
-                title: Text('Upload a video'),
+                title: Text('動画をアップロード'),
                 onTap: () {
                   pickFile(DefaultAttachmentTypes.video, false);
                   Navigator.pop(context);
@@ -691,7 +691,7 @@ class MessageInputState extends State<MessageInput> {
               if (!kIsWeb)
                 ListTile(
                   leading: Icon(Icons.camera_alt),
-                  title: Text('Photo from camera'),
+                  title: Text('写真を撮ってアップロード'),
                   onTap: () {
                     pickFile(DefaultAttachmentTypes.image, true);
                     Navigator.pop(context);
@@ -700,7 +700,7 @@ class MessageInputState extends State<MessageInput> {
               if (!kIsWeb)
                 ListTile(
                   leading: Icon(Icons.videocam),
-                  title: Text('Video from camera'),
+                  title: Text('動画を撮ってアップロード'),
                   onTap: () {
                     pickFile(DefaultAttachmentTypes.video, true);
                     Navigator.pop(context);
@@ -708,7 +708,7 @@ class MessageInputState extends State<MessageInput> {
                 ),
               ListTile(
                 leading: Icon(Icons.insert_drive_file),
-                title: Text('Upload a file'),
+                title: Text('ファイルをアップロード'),
                 onTap: () {
                   pickFile(DefaultAttachmentTypes.file, false);
                   Navigator.pop(context);

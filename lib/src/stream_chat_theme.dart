@@ -250,7 +250,7 @@ class StreamChatThemeData {
       ),
       channelTheme: ChannelTheme(
         messageInputDecoration: InputDecoration(
-          hintText: 'Write a message',
+          hintText: 'コメント',
           hintStyle: theme.textTheme.bodyText2,
           prefixText: '   ',
           border: InputBorder.none,
