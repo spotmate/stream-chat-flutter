@@ -40,6 +40,8 @@ class MessageText extends StatelessWidget {
           } else {
             print('tap on ${mentionedUser.name}');
           }
+        } else if (link.startsWith('@')) {
+          launchCustomURL(context, link);
         } else {
           if (onLinkTap != null) {
             onLinkTap(link);

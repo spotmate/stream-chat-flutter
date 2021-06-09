@@ -12,3 +12,7 @@ Future<void> launchURL(BuildContext context, String url) async {
     );
   }
 }
+
+Future<void> launchCustomURL(BuildContext context, String url) async {
+  await launch(url);
+}
