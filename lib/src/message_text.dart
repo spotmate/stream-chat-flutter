@@ -41,8 +41,10 @@ class MessageText extends StatelessWidget {
             print('tap on ${mentionedUser.name}');
           }
         } else if (link.startsWith('ucare')) {
+          debugPrint('ucare');
           launchCustomURL(context, link);
         } else {
+          debugPrint('bbb');
           if (onLinkTap != null) {
             onLinkTap(link);
           } else {

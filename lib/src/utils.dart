@@ -14,5 +14,6 @@ Future<void> launchURL(BuildContext context, String url) async {
 }
 
 Future<void> launchCustomURL(BuildContext context, String url) async {
+  debugPrint('aaa');
   await launch(url);
 }
