@@ -108,6 +108,7 @@ class MessageListView extends StatefulWidget {
     this.onParentMessageTap,
     this.scrollPhysics = const AlwaysScrollableScrollPhysics(),
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
+    this.onLinkTap
   }) : super(key: key);
 
   /// Function used to build a custom message widget
@@ -144,8 +145,10 @@ class MessageListView extends StatefulWidget {
   /// The [ScrollViewKeyboardDismissBehavior] used by the ListView
   final ScrollViewKeyboardDismissBehavior keyboardDismissBehavior;
 
+  final Function(String) onLinkTap;
+
   @override
-  _MessageListViewState createState() => _MessageListViewState();
+  _MessageListViewState createState() => _MessageListViewState(onLinkTap: onLinkTap);
 }
 
 class _MessageListViewState extends State<MessageListView> {
@@ -156,6 +159,11 @@ class _MessageListViewState extends State<MessageListView> {
   List<Message> _messages = [];
   List<Message> _newMessageList = [];
   Function _onThreadTap;
+  Function onLinkTap;
+
+  _MessageListViewState({
+    this.onLinkTap
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -248,7 +256,7 @@ class _MessageListViewState extends State<MessageListView> {
                       _messages),
                 );
               } else {
-                messageWidget = buildMessage(message, _messages, i);
+                messageWidget = buildMessage(message, _messages, i, onLinkTap);
               }
             }
 
@@ -263,10 +271,10 @@ class _MessageListViewState extends State<MessageListView> {
                     padding: const EdgeInsets.symmetric(vertical: 12.0),
                     child: widget.dateDividerBuilder != null
                         ? widget
-                            .dateDividerBuilder(nextMessage.createdAt.toLocal())
+                        .dateDividerBuilder(nextMessage.createdAt.toLocal())
                         : DateDivider(
-                            dateTime: nextMessage.createdAt.toLocal(),
-                          ),
+                      dateTime: nextMessage.createdAt.toLocal(),
+                    ),
                   ),
                 ],
               );
@@ -336,7 +344,7 @@ class _MessageListViewState extends State<MessageListView> {
         ),
       );
     } else {
-      messageWidget = buildMessage(message, messages, _messages.length - 1);
+      messageWidget = buildMessage(message, messages, _messages.length - 1, onLinkTap);
     }
 
     return VisibilityDetector(
@@ -378,7 +386,7 @@ class _MessageListViewState extends State<MessageListView> {
         ),
       );
     } else {
-      messageWidget = buildMessage(message, messages, 0);
+      messageWidget = buildMessage(message, messages, 0, onLinkTap);
     }
 
     return VisibilityDetector(
@@ -434,10 +442,11 @@ class _MessageListViewState extends State<MessageListView> {
   }
 
   Widget buildMessage(
-    Message message,
-    List<Message> messages,
-    int index,
-  ) {
+      Message message,
+      List<Message> messages,
+      int index,
+      Function(String) onLinkTap,
+      ) {
     if (message.type == 'system' && message.text?.isNotEmpty == true) {
       return SystemMessage(
         onMessageTap: widget.onSystemMessageTap,
@@ -458,10 +467,10 @@ class _MessageListViewState extends State<MessageListView> {
         ?.read
         ?.where((element) => element.user.id != userId)
         ?.where((read) =>
-            (read.lastRead.isAfter(message.createdAt) ||
-                read.lastRead.isAtSameMomentAs(message.createdAt)) &&
-            (index == 0 ||
-                read.lastRead.isBefore(messages[index - 1].createdAt)))
+    (read.lastRead.isAfter(message.createdAt) ||
+        read.lastRead.isAtSameMomentAs(message.createdAt)) &&
+        (index == 0 ||
+            read.lastRead.isBefore(messages[index - 1].createdAt)))
         ?.toList();
 
     return MessageWidget(
@@ -475,7 +484,7 @@ class _MessageListViewState extends State<MessageListView> {
       ),
       showUsername: !isMyMessage && !isNextUser,
       showSendingIndicator: isMyMessage &&
-              (index == 0 || message.status != MessageSendingStatus.SENT)
+          (index == 0 || message.status != MessageSendingStatus.SENT)
           ? DisplayWidget.show
           : DisplayWidget.hide,
       onMessageTap: widget.onMessageTap,
@@ -484,6 +493,7 @@ class _MessageListViewState extends State<MessageListView> {
       showDeleteMessage: false,
       borderSide: isMyMessage ? BorderSide.none : null,
       onThreadTap: _onThreadTap,
+      onLinkTap: onLinkTap,
       attachmentBorderRadiusGeometry: BorderRadius.circular(16),
       borderRadiusGeometry: BorderRadius.only(
         topLeft: Radius.circular(isLastUser ? 2 : 16),
