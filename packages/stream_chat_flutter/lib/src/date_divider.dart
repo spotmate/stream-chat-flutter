@@ -24,10 +24,10 @@ class DateDivider extends StatelessWidget {
 
     String dayInfo;
     if (Jiffy(createdAt).isSame(now, Units.DAY)) {
-      dayInfo = 'Today';
+      dayInfo = '今日';
     } else if (Jiffy(createdAt)
         .isSame(now.subtract(const Duration(days: 1)), Units.DAY)) {
-      dayInfo = 'Yesterday';
+      dayInfo = '昨日';
     } else if (Jiffy(createdAt).isAfter(
       now.subtract(const Duration(days: 7)),
       Units.DAY,

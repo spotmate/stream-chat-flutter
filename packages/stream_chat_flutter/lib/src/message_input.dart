@@ -729,9 +729,9 @@ class MessageInputState extends State<MessageInput> {
       return 'Search GIFs';
     }
     if (_attachments.isNotEmpty) {
-      return 'Add a comment or send';
+      return 'コメントを追加するかそのまま送信';
     }
-    return 'Write a message';
+    return 'コメント';
   }
 
   void _checkEmoji(String s, BuildContext context) {

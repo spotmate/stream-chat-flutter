@@ -71,12 +71,12 @@ class ChannelInfo extends StatelessWidget {
       if (otherMember != null) {
         if (otherMember.user?.online == true) {
           alternativeWidget = Text(
-            'Online',
+            'オンライン',
             style: textStyle,
           );
         } else {
           alternativeWidget = Text(
-            'Last seen ${Jiffy(otherMember.user?.lastActive).fromNow()}',
+            '最後に見たのは ${Jiffy(otherMember.user?.lastActive).fromNow()}',
             style: textStyle,
           );
         }
@@ -106,7 +106,7 @@ class ChannelInfo extends StatelessWidget {
           ),
           const SizedBox(width: 10),
           Text(
-            'Searching for Network',
+            'ネットワークに接続中',
             style: textStyle,
           ),
         ],

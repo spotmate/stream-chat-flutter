@@ -327,7 +327,7 @@ class _MessageListViewState extends State<MessageListView> {
       emptyBuilder: widget.emptyBuilder ??
           (context) => Center(
                 child: Text(
-                  'No chats here yet...',
+                  'まだメッセージはありません',
                   style: chatThemeData.textTheme.footnote.copyWith(
                       color: chatThemeData.colorTheme.black.withOpacity(.5)),
                 ),
